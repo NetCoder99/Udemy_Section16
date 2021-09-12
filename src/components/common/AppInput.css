@@ -1,0 +1,24 @@
+.AppInput {
+  margin-bottom: .5rem;
+}
+
+.AppInput input {
+  display: block;
+  font: inherit;
+  padding: 0.2rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 20rem;
+  max-width: 100%;
+}
+
+.AppInput label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.AppInput input:focus {
+  outline: none;
+  border-color: #240370;
+  background-color: #e0d4fd;
+}

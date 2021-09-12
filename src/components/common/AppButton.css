@@ -1,0 +1,41 @@
+.AppButton {
+  cursor: pointer;
+  font: inherit;
+  background-color: #7a0144;
+  border: 1px solid #7a0144;
+  border-radius: 20px;
+  padding: 0.2rem 1rem;
+  color: white;
+}
+
+.AppButton:hover,
+.AppButton:active {
+  background-color: #9c095a;
+  border-color: #9c095a;
+}
+.AppButton:disabled {
+  cursor: auto;
+  background-color: lightgrey;
+  border-color: lightslategray;
+}
+
+.AppButton2 {
+  cursor: pointer;
+  font: inherit;
+  background-color: #4360e0;
+  border: 1px solid #4360e0;
+  border-radius: 20px;
+  padding: 0.2rem 1rem;
+  color: white;
+}
+
+.AppButton2:hover,
+.AppButton2:active {
+  background-color: #5a73e2;
+  border-color: #5a73e2;
+}
+.AppButton2:disabled {
+  cursor: auto;
+  background-color: lightgrey;
+  border-color: lightslategray;
+}
