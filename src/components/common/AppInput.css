@@ -22,3 +22,13 @@
   border-color: #240370;
   background-color: #e0d4fd;
 }
+
+.invalid {
+  border: 1px solid #b40e0e;
+  background-color: #fddddd;
+}
+
+.invalid input:focus {
+  border-color: #ff8800;
+  background-color: #fbe8d2;
+}
