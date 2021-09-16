@@ -1,32 +1,22 @@
-import React, { FormEvent } from "react";
+import React, { useRef, FormEvent, useState } from "react";
 import "./SimpleInput.css";
 
 import AppButton from "./common/AppButton";
 import AppInput from "./common/AppInput";
-import { useValidate } from "../hooks/useValidate";
+import { useValidate, isEmailValid, isNotEmpty } from "../hooks/useValidate";
+import FirstNameInput  from "./inputFields/FirstNameInput";
+import LastNameInput  from "./inputFields/LastNameInput";
 
 const SimpleInput: React.FC<{}> = (props) => {
-  function isEmail(val: string) {
-    let regEmail =
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return regEmail.test(val);
-  }
-  //const isEmpty = (val:string) => {
-  //  return val.trim() === '';
-  //}
-  const isNotEmpty = (val: string) => {
-    return val.trim() !== "";
-  };
-
   const {
-    inpValue: firstName,
-    onChangedHandler: firstNameChangeHandler,
-    onBlurHandler: firstNameBlurHandler,
-    isValid: firstNameIsValid,
+     inpValue: firstNameValue,
+     onChangedHandler: firstNameChangeHandler,
+     onBlurHandler: firstNameBlurHandler,
+     isValid: firstNameIsValid,
   } = useValidate(isNotEmpty);
 
   const {
-    inpValue: lastName,
+    inpValue: lastNameValue,
     onChangedHandler: lastNameChangeHandler,
     onBlurHandler: lastNameBlurHandler,
     isValid: lastNameIsValid,
@@ -37,29 +27,18 @@ const SimpleInput: React.FC<{}> = (props) => {
     onChangedHandler: emailChangeHandler,
     onBlurHandler: emailBlueHandler,
     isValid: emailIsValid,
-  } = useValidate(isEmail);
-
-  // //const {} = use
-  // const inpStatusInit = {
-  //   isLoading: false,
-  //   hasError: false,
-  //   message: "",
-  //   firstName: "",
-  //   lastName: "",
-  //   email: "",
-  //   formIsValid: false,
-  //   formWasTouched: false,
-  // };
+  } = useValidate(isEmailValid);
 
   const formIsValid = firstNameIsValid && lastNameIsValid && emailIsValid;
-  const message = firstName + "," + lastName + "::" + emailValue;
+  const message = firstNameValue && "," && lastNameValue + "::" + emailValue;
+
   const formSubmitHandler = (event: FormEvent) => {
     event.preventDefault();
     console.log(
       "SimpleInput.formSubmitHandler:" +
-        firstName +
+        firstNameValue +
         "," +
-        lastName +
+        lastNameValue +
         "::" +
         emailValue
     );
@@ -67,27 +46,17 @@ const SimpleInput: React.FC<{}> = (props) => {
 
   return (
     <form onSubmit={formSubmitHandler}>
-      <div>
-        <AppInput
-          onChangeHandler={firstNameChangeHandler}
+      <div className="box">
+        <FirstNameInput 
           onBlurHandler={firstNameBlurHandler}
-          labelText="First Name:"
-          inputId="inpFirstName"
-          inputClass={`${"AppInput width8rem display-inline"} ${
-            !firstNameIsValid && "invalid"
-          } `}
-          labelClass="width6rem display-inline"
-        />
-        <AppInput
-          onChangeHandler={lastNameChangeHandler}
+          onChangedHandler={firstNameChangeHandler}
+          isValid={firstNameIsValid}
+        /> 
+        <LastNameInput 
           onBlurHandler={lastNameBlurHandler}
-          labelText="Last Name:"
-          inputId="inpLastName"
-          inputClass={`${"AppInput width8rem display-inline"} ${
-            !lastNameIsValid && "invalid"
-          } `}
-          labelClass="width6rem display-inline"
-        />
+          onChangedHandler={lastNameChangeHandler}
+          isValid={lastNameIsValid}
+        /> 
       </div>
       <AppInput
         onChangeHandler={emailChangeHandler}
